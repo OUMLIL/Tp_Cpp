@@ -1,25 +1,27 @@
 #pragma once 
 
+#include "string"
+#include "Forme.hpp"
 #include "Cercle.hpp"
 #include "Rectangle.hpp"
-#include "string"
 
-
-class Groupe {
+class Groupe : Forme{
     private:
         static constexpr std::size_t size{255};
-        Cercle * cercles[size];
+        Forme * formes[size];
         int nb_c{0};
-        Rectangle * rectangles[size];
         int nb_r{0};
         static int compteur;
 
     public:
+        Groupe(Point p, Couleurs c, int w, int h);
         Groupe();
         ~Groupe();
-        void toString();
+        std::string toString();
         void ajouterCercle(Cercle c);
         void ajouterRectangle(Rectangle r);
+        int  getNbElements();
+
         static int getCompteur();
 
 };

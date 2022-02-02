@@ -6,6 +6,7 @@
 #include "Rectangle.hpp"
 #include "Forme.hpp"
 #include "Cercle.hpp"
+#include "Groupe.hpp"
 
 // NOTE : ce test utilise des enum "class"
 // il faut donc utiliser un compilateur g++ >= 6.1
@@ -103,7 +104,6 @@ TEST_CASE("BoiteEnglobante", "[Forme]") {
 */
 
 
-
 TEST_CASE("Cercle", "[Cercle]") {
    int compteur = Forme::prochainId();
    Cercle c1;
@@ -139,3 +139,23 @@ TEST_CASE("Polymorphisme", "[Forme]") {
    	delete f1;
    	delete f2;
 }
+
+
+TEST_CASE("Liste de formes", "[Groupe]") {
+
+	Groupe l{}; 
+    Cercle c_tab[10]; 
+    Rectangle r_tab[10];
+
+    l.ajouterCercle(c_tab[0]); //c ordre 0
+    l.ajouterCercle(c_tab[1]); //c ordre 1
+
+    l.ajouterRectangle(r_tab[1]); //r ordre 2
+    l.ajouterCercle(c_tab[2]); //c ordre 3
+
+	std::cout << l.getNbElements() << std::endl;
+    std::cout << l.toString();
+    std::cout << "next id " << Forme::prochainId() << std::endl;
+}
+
+

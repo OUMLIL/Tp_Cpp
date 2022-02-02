@@ -1,5 +1,5 @@
 #SRC=Cercle.cpp Liste.cpp Rectangle.cpp Forme.cpp Point.cpp main.cpp
-SRC=Cercle.cpp Forme.cpp Point.cpp Rectangle.cpp tests_catch.cpp main_catch.cpp
+SRC=Groupe.cpp Cercle.cpp Forme.cpp Point.cpp Rectangle.cpp tests_catch.cpp main_catch.cpp
 #SRC=$(wildcard *.cpp) 
 #SRC=Forme.cpp Point.cpp tests_catch.cpp main_catch.cpp
 EXE=appli
