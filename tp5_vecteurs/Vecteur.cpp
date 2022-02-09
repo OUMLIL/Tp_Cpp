@@ -74,6 +74,14 @@ const char * Vecteur::OutOfRangeException::what() const noexcept {
     return err;
 }
 
+const double * Vecteur::begin() const {
+    return tab;
+}
+
+const double * Vecteur::end() const {
+    return tab + nbElements;
+}
+
 
 int Vecteur::capacity() const {
     return capacite;

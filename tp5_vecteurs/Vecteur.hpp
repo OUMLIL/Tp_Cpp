@@ -24,9 +24,10 @@ class Vecteur {
             const char * what() const noexcept;
         };
 
-        ~Vecteur();
+        const double * begin() const;
+        const double * end() const;
 
-        
+        ~Vecteur();
 
 };
 

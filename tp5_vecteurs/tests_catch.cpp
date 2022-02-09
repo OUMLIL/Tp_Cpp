@@ -20,7 +20,7 @@ TEST_CASE ("Vecteur2" ) {
 
 TEST_CASE ("Vecteur3" ) {
   Vecteur v(5);
- 
+
   SECTION("ajout de quelques elements") {
     REQUIRE ( v.capacity() == 5 );
 
@@ -49,11 +49,16 @@ TEST_CASE ("Vecteur3" ) {
 
     for (int i=0; i<25; ++i)
       CHECK(v[i] == Approx(i*1.0));  // :-)
+    
+    for(double x : v) {
+     CHECK(x == Approx(x*1.0));  // :-)
+    }
   }
 
   SECTION("on verifie les exceptions") {
-    REQUIRE_THROWS_AS( v[-1] == 0, Vecteur::OutOfRangeException); 
-    REQUIRE_THROWS_AS( v [6] == 0, Vecteur::OutOfRangeException);  // :-)
+    REQUIRE_THROWS_AS( v[-1] == 0, const Vecteur::OutOfRangeException &); 
+    REQUIRE_THROWS_AS( v [6] == 0, const Vecteur::OutOfRangeException &);  // :-)
    }
 }
+
 
