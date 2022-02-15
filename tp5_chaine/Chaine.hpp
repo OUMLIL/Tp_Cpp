@@ -10,6 +10,17 @@ class Chaine  {
         char * tab{nullptr};
         void alloc(int capacite = 0);
     public:
+        class OutOfRangeException : public std::out_of_range {
+            public:
+                OutOfRangeException(std::string s);
+        };
+
+        class null_pointer : public std::logic_error {
+            public:
+                null_pointer();
+                null_pointer(std::string s);
+        };
+
         //constructeurs
         Chaine();
         Chaine(const char * inCS);

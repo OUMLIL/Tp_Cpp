@@ -14,8 +14,10 @@ Chaine::Chaine(const char * inCS) {
 
 
 Chaine::Chaine(int cap): capacite(cap) {
-    alloc(capacite + 1);
-    tab[0] = 0;
+    if(capacite >= 0) {
+        alloc(capacite + 1);
+        tab[0] = 0;
+    }
 }
 
 Chaine::Chaine(Chaine const & ObjtoCopy) {
@@ -23,6 +25,17 @@ Chaine::Chaine(Chaine const & ObjtoCopy) {
     capacite = ObjtoCopy.capacite;
     alloc(capacite + 1);
     strcpy(tab, ObjtoCopy.tab);
+}
+
+Chaine::OutOfRangeException::OutOfRangeException(std::string s): std::out_of_range(s) {
+}
+
+Chaine::null_pointer::null_pointer(std::string s): std::logic_error(s) {
+    
+}
+
+Chaine::null_pointer::null_pointer():std::logic_error("null ptr error") {
+
 }
 
 void Chaine::alloc(int capacite) {
@@ -51,15 +64,21 @@ Chaine & Chaine::operator=(Chaine const & inCs) {
 }
 
 char & Chaine::operator[](int id) {
+    if(tab == nullptr) {
+        throw null_pointer{};
+    }
     if(id < 0 || id >= capacite) {
-        throw std::out_of_range{"invalid index"};
+        throw OutOfRangeException{"invalid index"};
     }
     return tab[id];
 }
 
 char const & Chaine::operator[](int id) const{
+    if(tab == nullptr) {
+        throw null_pointer{};
+    }
     if(id < 0 || id >= capacite) {
-        throw std::out_of_range{"invalid index"};
+        throw OutOfRangeException{"invalid index"};
     }
     return tab[id];
 }

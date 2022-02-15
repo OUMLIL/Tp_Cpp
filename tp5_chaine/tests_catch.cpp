@@ -128,8 +128,8 @@ TEST_CASE("Concatenation chaine vide") {
     const char * c2 = "";
     Chaine s1(c1);
     Chaine s2(c2);
-    Chaine s3 = s1 + s2;
 
+    Chaine s3 = s1 + s2;
     CHECK(strcmp(s3.c_str(), "") == 0);
 }
 
@@ -142,4 +142,25 @@ TEST_CASE("Concatenation chaine non vide") {
     Chaine s3 = s1 + s2;
 
     CHECK(strcmp(s3.c_str(), "whatISLOVE") == 0);
+}
+
+
+TEST_CASE("exceptions aux bornes") {
+  Chaine s(10);
+    
+  REQUIRE_THROWS_AS( s[-1] == 0, Chaine::OutOfRangeException &);
+  // OU
+  REQUIRE_THROWS_AS( s[-1] == 0, std::out_of_range &);
+  REQUIRE_THROWS_AS( s[12] == 0, std::out_of_range &);  // :-)
+}
+
+
+TEST_CASE("exception sur pointeur null") {
+  Chaine s(0);
+    
+  // verification que l'heritage est bien fait  
+  std::logic_error * pe = new Chaine::null_pointer;  
+  delete pe;
+
+  REQUIRE_THROWS_AS( s[1] == 0, Chaine::null_pointer &);
 }
