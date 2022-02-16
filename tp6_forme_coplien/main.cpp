@@ -1,44 +1,29 @@
 #include <iostream>
+#include <vector>
 
 class M {
- public:  
+  public:  
+  int i{};
+  //A a;
   M() {
-    std::cout << "M::M()" << std::endl;
+    //std::cout << "M::M()" << std::endl;
+  }
+  M(int c): i(c) {
+    //std::cout << "M::M()" << std::endl;
   }
    ~M() {
-    std::cout << "M::~M()" << std::endl;
+    //std::cout << "M::~M()" << std::endl;
   }
-    M(const M&) {
-    std::cout << "M::M(const M&)" << std::endl;
-  }
-  M & operator=(const M & m) {
-    std::cout << "lol" << std::endl;
-    return *this;
+
+  M(const M & m): i(m.i) {
+     std::cout << "M::M(const M&)" << std::endl;
   }
   
-};
-
-class A {
-  M m;
- public:  
-  A() {
-    std::cout << "A::A()" << std::endl;
-  }
-   ~A() {
-    std::cout << "A::~A()" << std::endl;
-  }
-  A(const A& a) {
-    M x(a.m);
-    m = x;
-    this->t();
-    std::cout << "A::A(const A&)" << std::endl;
-  }
-  A & operator=(const A & a) {
-    std::cout << "AAA" << std::endl;
+  M & operator=(const M & m) {
+    i = m.i;
+    //a = m.a; //affectation we can't use a(m.a) -> this is an initialization list
+     std::cout << "lol" << std::endl;
     return *this;
-  }
-  void t() {
-    std::cout << &m << std::endl;
   }
 };
 
@@ -64,15 +49,54 @@ class F : public M {
 
 };
 
+
+class A {
+  public:
+    std::vector<M> ms;
+    A() {
+      //std::cout << "A::A()" << std::endl;
+    }
+    ~A() {
+      //std::cout << "A::~A()" << std::endl;
+    }
+
+    //A(A const & a) = default;
+
+    A(A const & a) {
+
+      ms.reserve(a.ms.size());
+      std::cout << "ms size" << ms.size() << std::endl; // --> 0
+
+      //call copy constructor of M
+      std::copy(a.ms.begin(), a.ms.end(), std::back_inserter(ms));
+      //std::copy(a.ms.begin(), a.ms.end(), ms.begin());
+    }
+};
+
 int main(int, char**) {
   /*
   F f1; //construction
   F f2 = f1;
   f1 = f2;
   */
+  //A a;
+  //A a1 = a;
+  M m{1};
+  M m1{2};
+  M m2{3};
+  M m3{4};
+
   A a;
-  A a1 = a;
-  a1.t();
-  a.t();
+  a.ms.push_back(m);a.ms.push_back(m1);a.ms.push_back(m2);a.ms.push_back(m3);
+
+  A b(a); 
+
+  std::cout << b.ms.size() << std::endl; // 4 with std::backinserter and 0 
+  std::cout << a.ms.size() << std::endl; // 4
+
+  for(auto const & c : b.ms) {
+    std::cout << c.i << std::endl;
+  }
+
   return 0;
 }
