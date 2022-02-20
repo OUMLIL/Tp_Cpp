@@ -32,8 +32,9 @@ void Pile::full() {
 }
 
 int Pile::push(int element) {
-    //exception if stack full
-    this->full();
+    
+    this->full(); //throws exception if stack full
+    
     tail = tail + 1;
     capacity++;
     tab[tail] = element;
