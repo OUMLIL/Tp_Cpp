@@ -15,7 +15,7 @@
 
 // Les tests ne sont pas exhaustifs, loin de là
 
-
+/*
 TEST_CASE("Instanciation", "[Point]") {
 	Point p1;
 	REQUIRE(p1.getX() == 0);
@@ -102,6 +102,7 @@ TEST_CASE("BoiteEnglobante", "[Forme]") {
 	REQUIRE (f.getHauteur() == 0);
 }
 
+*/
 
 TEST_CASE("Cercle", "[Cercle]") {
    int compteur = Forme::prochainId();
@@ -164,4 +165,25 @@ TEST_CASE("Liste de formes", "[Groupe]") {
     std::cout << "next id " << Forme::prochainId() << std::endl;
 }
 
+
+TEST_CASE("cloning cercle", "[Cercle]") {
+	Groupe l{}; 
+    Cercle c_tab[10]; 
+    Rectangle r_tab[10];
+
+	l.ajouterCercle(c_tab[0]); //c ordre 0
+    l.ajouterCercle(c_tab[1]); //c ordre 1
+
+    l.ajouterRectangle(r_tab[1]); //r ordre 2
+    l.ajouterCercle(c_tab[2]); //c ordre 3
+	Point p{1,1};
+	Couleurs c{Couleurs::BLEU};
+	Cercle c1{p,c,10,20};
+	l.ajouterCercle(c1);
+
+	Groupe * grp = l.clone();
+	std::cout << grp->toString() << std::endl;
+
+	delete grp;
+}
 

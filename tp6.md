@@ -1,4 +1,10 @@
 # construction par copie
+
+## file_rouge clone methode:
+
+no need to use a constructor per copy if all objects have primitive types even if the objects are declared within other objects
+fla : fixed length array  (copied without problems)
+vla : variable length array (variable au run time) not cpp standard
 ## scenario 1:
 ---------------------
 ```cpp
@@ -109,3 +115,7 @@
     }
 
 ```
+
+# check if trivial/fundamentale"primitif" copiable
+-------------------------------
+https://en.cppreference.com/w/cpp/header/type_traits

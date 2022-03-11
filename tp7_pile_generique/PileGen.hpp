@@ -17,18 +17,29 @@ class PileGen {
             try {
                 tab = new T[stack_len];
             } catch (std::bad_alloc & e) {
-                e.what();
-                delete[] tab;
                 tab = nullptr;
                 throw;
             }
+        }
+
+        PileGen(const PileGen & p) {
+            
+            stack_len = p.stack_len;
+            capacity = p.capacity;
+            try {
+                tab = new T[stack_len];
+            } catch (std::bad_alloc & e) {
+                tab = nullptr;
+                throw;
+            }
+            std::copy(p.tab, p.tab+stack_len, tab);
         }
 
         ~PileGen(){
             delete[] tab;
         }
 
-        bool empty(){
+        bool isEmpty(){
             //if(!stack_len) throw std::invalid_argument("empty stack");
             return tail == -1;
         }
@@ -39,27 +50,25 @@ class PileGen {
             }
         }
 
-        int push(const T & element) {
+        void push(const T & element) {
     
             this->full(); //throws exception if stack full
             tail = tail + 1;
             capacity++;
             tab[tail] = element;
-            return 0; //push ok
         }
 
         const T & top() {
-            if(this->empty()) throw std::invalid_argument("empty stack");
+            if(this->isEmpty()) throw std::invalid_argument("empty stack");
             return tab[tail];
         }
 
-        int pop() {
-            if(this->empty()) {
+        void pop() {
+            if(this->isEmpty()) {
                 throw std::invalid_argument("empty stack");
             }
             tail--;
             capacity--;
-            return 0; //pop ok
         }
         
 

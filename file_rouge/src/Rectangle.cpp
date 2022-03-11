@@ -23,3 +23,9 @@ std::string Rectangle::toString() {
 
     return s;
 }
+
+
+Rectangle * Rectangle::clone() {
+    Rectangle * rec_copy = new Rectangle(*this);
+    return rec_copy;
+}

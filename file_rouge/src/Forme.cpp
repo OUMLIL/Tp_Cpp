@@ -68,6 +68,9 @@ std::string Forme::toString() {
     return "";
 }
 
+Forme * Forme::clone() {
+    return nullptr;
+}
 
 //destructeur
 Forme::~Forme() {

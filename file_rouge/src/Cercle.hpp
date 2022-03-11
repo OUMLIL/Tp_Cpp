@@ -15,4 +15,5 @@ class Cercle : public Forme {
         std::string toString();
         void setRayon(int r);
         int getRayon();
+        Cercle * clone() override; 
 };

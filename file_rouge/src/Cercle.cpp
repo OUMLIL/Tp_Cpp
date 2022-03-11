@@ -24,3 +24,10 @@ std::string Cercle::toString() {
 
     return s;
 }
+
+
+Cercle * Cercle::clone() {
+
+    Cercle * cercle_copy = new Cercle(*this);
+    return cercle_copy;
+}

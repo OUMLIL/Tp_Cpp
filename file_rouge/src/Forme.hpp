@@ -37,6 +37,8 @@ class Forme{
         virtual void setCouleur(Couleurs c);
 
         virtual std::string toString();
+
+        virtual Forme * clone();
         
         //static functions
         static int getNbForme();

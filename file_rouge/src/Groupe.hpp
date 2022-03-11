@@ -14,13 +14,15 @@ class Groupe : public Forme{
         static int compteur;
 
     public:
-        Groupe(Point p, Couleurs c, int w, int h);
+        Groupe(const Point & p, Couleurs c, int w, int h);
         Groupe();
         ~Groupe();
         std::string toString();
         void ajouterCercle(Cercle c);
         void ajouterRectangle(Rectangle r);
         int  getNbElements();
+        
+        Groupe * clone() override;
 
         static int getCompteur();
 

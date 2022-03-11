@@ -12,4 +12,5 @@ class Rectangle : public Forme {
         Rectangle(Point p, Couleurs c, int width, int height);
         Rectangle();
         std::string toString() override;
+        Rectangle * clone() override;
 };

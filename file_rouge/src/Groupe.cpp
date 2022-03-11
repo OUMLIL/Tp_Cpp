@@ -3,7 +3,7 @@
 //static Attributes
 int Groupe::compteur = 0;
 
-Groupe::Groupe(Point p, Couleurs c, int w, int h): Forme(p, c, w, h) {
+Groupe::Groupe(const Point & p, Couleurs c, int w, int h): Forme(p, c, w, h) {
     std::cout << "Groupe constructing" << std::endl;
 }
 
@@ -68,6 +68,7 @@ int Groupe::getNbElements() {
 }
 
 Groupe::~Groupe() {
+    
     for(int i = 0; i < nb_c + nb_r; ++i) {
         delete formes[i];
     }
@@ -76,4 +77,16 @@ Groupe::~Groupe() {
 //static methods
 int Groupe::getCompteur() {
     return compteur;
+}
+
+Groupe * Groupe::clone() {
+
+    Groupe * g = new Groupe(*this);
+
+    //boucler pour copier 
+    
+    //std::copy copy que les pointeurs
+    std::copy(formes, formes+size, g->formes);
+
+    return g;
 }
